@@ -12,19 +12,34 @@
 #include <qflib/methods/montecarlo/pathgenerator.hpp>
 #include <qflib/methods/montecarlo/eulerpathgenerator.hpp>
 #include <qflib/math/stats/statisticscalculator.hpp>
+#include <qflib/market/volatilitytermstructure.hpp>
+
 
 BEGIN_NAMESPACE(qf)
+
+
 
 /** Monte Carlo pricer in the Black-Scholes model (deterministic rates and vols).
 */
 class BsMcPricer
 {
 public:
-  /** Initializing ctor */
+  BsMcPricer(SPtrProduct prod,
+    SPtrYieldCurve discountYieldCurve,
+    double divYield,
+    double vol,             
+    double spot,
+    McParams mcparams);
+  
+
+  /** Constructor with a volatility term structure.
+      The vol term structure is used to get the volatilities for the path generator.
+      The vol term structure must be deterministic (i.e. no stochastic vol).
+      */
   BsMcPricer(SPtrProduct prod,
              SPtrYieldCurve discountYieldCurve,
              double divYield,
-             double volatility,
+             SPtrVolatilityTermStructure volTS, // pointer to volatility term structure
              double spot,
              McParams mcparams);
 
@@ -49,6 +64,7 @@ private:
   double vol_;            // the constant volatility
   double spot_;           // the initial spot
   McParams mcparams_;     // the Monte Carlo parameters
+  SPtrVolatilityTermStructure volTS_; // pointer to the volatility term structure
 
   SPtrPathGenerator pathgen_;  // pointer to the path generator
   Vector discfactors_;         // caches the pre-computed discount factors

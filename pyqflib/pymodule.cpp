@@ -62,7 +62,7 @@ static PyMethodDef PyQflibMethods[] =
   { "capFloorletBS", pyQfCapFloorletBS, METH_VARARGS, "present value of a caplet/floorlet on fwd rate." },
   { "cdsPV", pyQfCDSPV, METH_VARARGS, "present value of a CDS." },
 // functions 3
-  { "euroBSMC", pyQfEuroBSMC, METH_VARARGS, "price of a European option in the Black-Scholes model using Monte Carlo." },
+  { "euroBSMC", pyQfEuroBSMC, METH_VARARGS | METH_KEYWORDS, "price of a European option in the Black-Scholes model using Monte Carlo." },
   {NULL, NULL, 0, NULL}
 };
 

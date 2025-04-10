@@ -631,3 +631,44 @@ def euroBSMC(payofftype, strike, timetoexp, spot, discountcrv, divyield, volatil
         StdErr : Monte Carlo standard error
     """
     return pyqflib.euroBSMC(payofftype, strike, timetoexp, spot, discountcrv, divyield, volatility, mcparams, npaths)
+
+def digiBSMC(payofftype, strike, timetoexp, spot, discountcrv, divyield, volatility, mcparams, npaths):
+    """
+    Price a European digital (cash-or-nothing) call/put option in the Black–Scholes model using Monte Carlo.
+
+    Parameters
+    ----------
+    payofftype : int
+        +1 => digital call => payoff = 1 if S(T) > K
+        -1 => digital put  => payoff = 1 if S(T) < K
+    strike : float
+        The strike price
+    timetoexp : float
+        Time to expiration (in years)
+    spot : float
+        Current spot price of the underlying
+    discountcrv : str
+        The name of the discount yield curve in the market store (e.g. "USD")
+    divyield : float
+        Continuous dividend yield
+    volatility : float or str
+        If float, a constant volatility (e.g. 0.30)
+        If str, a name referencing a VolatilityTermStructure (e.g. "VOLTS")
+    mcparams : dict
+        A dictionary specifying Monte Carlo parameters like:
+            {
+              "PATHGENTYPE": "EULER",
+              "URNGTYPE":    "MT19937"
+            }
+    npaths : int
+        Number of Monte Carlo simulation paths
+
+    Returns
+    -------
+    dict
+        A dictionary with keys:
+        - "Mean":   The estimated option price
+        - "StdErr": The standard error of the Monte Carlo estimate
+    """
+    return pyqflib.digiBSMC(payofftype, strike, timetoexp, spot, discountcrv,
+                            divyield, volatility, mcparams, npaths)

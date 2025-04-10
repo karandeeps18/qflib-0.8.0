@@ -5,6 +5,7 @@
 #include <qflib/math/stats/meanvarcalculator.hpp>
 #include <qflib/math/random/rng.hpp>
 #include <qflib/exception.hpp>
+#include <qflib/products/digitalcallput.hpp>
 
 using namespace std;
 static
@@ -45,7 +46,7 @@ PY_BEGIN;
   unsigned long npaths = asInt(pyNPaths);
 
   // create the product
-  qf::SPtrProduct spprod(new qf::EuropeanCallPut(payoffType, strike, timeToExp));
+  qf::SPtrProduct spprod(new qf::DigitalCallPut(payoffType, strike, timeToExp));
   // create the pricer
   qf::BsMcPricer bsmcpricer(spprod, spyc, divYield, vol, spot, mcparams);
   // create the statistics calculator

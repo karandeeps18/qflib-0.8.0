@@ -52,22 +52,24 @@ DigitalCallPut::DigitalCallPut(int payoffType, double strike, double timeToExp)
 
   // this product generates only one payment
   payAmounts_.resize(1);
-  PAYaMOUNTS_[0] = 0.0; // initialize to zero
+  payAmounts_[0] = 0.0; // initialize to zero
 }
 
 inline void DigitalCallPut::eval(Matrix const& pricePath)
 {
+  double ST = pricePath(0, 0);
+
   double payoff = 0.0;
   if (payoffType_ == 1){
     // call option
     payoff = (ST > strike_) ? 1.0 : 0.0; 
-    } else {
+  } else {
     // put option
     payoff = (ST < strike_) ? 1.0 : 0.0; 
   }
   payAmounts_[0] = payoff; // set the payoff amount
-}
 
+}
 END_NAMESPACE(qf)
 
 #endif // QF_EUROPEANCALLPUT_HPP

@@ -48,6 +48,9 @@ VERSION 0.8.0
 
 14. Added solutions to homeworks 1-7
 
+15. new file `qflib\products\digitalcallput.hpp`
+    Created new product class, DigitalCallPut, which inherits from our base Product interface
+
 
 VERSION 0.7.0
 -------------

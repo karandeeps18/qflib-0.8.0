@@ -23,8 +23,8 @@ Developed as part of **QFGB8960** at **Fordham University** (Spring 2025), the l
 ## Build & Installation
 
 ```bash
-git clone https://github.com/<YourUserName>/qflib.git
+git clone https://github.com/karandeeps18/qflib-0.8.0.git
 cd qflib
 mkdir build && cd build
-cmake ..
+cmake .. Ninja
 cmake --build .
